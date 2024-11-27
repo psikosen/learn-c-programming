@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Trees: Nature's Data Structure 🌳</title>
+    
+    <!-- External dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    
+    <style>
+        .tree-node {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .tree-node:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+        
+        @keyframes growTree {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .animated-node {
+            animation: growTree 0.5s ease-out forwards;
+        }
+        
+        .formula-block {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .code-block {
+            background: #282a36;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .tree-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .tree-edge {
+            stroke: #4CAF50;
+            stroke-width: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .tree-edge:hover {
+            stroke-width: 3;
+            stroke: #2E7D32;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-6xl mx-auto p-8">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold mb-4 text-green-700">
+                🌳 Binary Trees: Nature's Data Structure
+            </h1>
+            <p class="text-xl text-gray-600">
+                Exploring the beautiful symmetry between natural trees and computational data structures!
+            </p>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Interactive Tree Visualization -->
+            <section class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold mb-6 text-green-600">Interactive Binary Tree</h2>
+                <div class="tree-container" id="tree-visualization">
+                    <!-- SVG Tree will be rendered here -->
+                    <svg width="100%" height="100%" viewBox="0 0 800 400">
+                        <!-- Edges -->
+                        <g class="edges">
+                            <line class="tree-edge" x1="400" y1="50" x2="200" y2="150" />
+                            <line class="tree-edge" x1="400" y1="50" x2="600" y2="150" />
+                            <line class="tree-edge" x1="200" y1="150" x2="100" y2="250" />
+                            <line class="tree-edge" x1="200" y1="150" x2="300" y2="250" />
+                            <line class="tree-edge" x1="600" y1="150" x2="500" y2="250" />
+                            <line class="tree-edge" x1="600" y1="150" x2="700" y2="250" />
+                        </g>
+                        
+                        <!-- Nodes -->
+                        <g class="nodes">
+                            <circle class="tree-node animated-node" cx="400" cy="50" r="30" fill="#4CAF50" />
+                            <text x="400" y="55" text-anchor="middle" fill="white" class="text-lg">50</text>
+                            
+                            <circle class="tree-node animated-node" cx="200" cy="150" r="30" fill="#66BB6A" style="animation-delay: 0.2s" />
+                            <text x="200" y="155" text-anchor="middle" fill="white" class="text-lg">30</text>
+                            
+                            <circle class="tree-node animated-node" cx="600" cy="150" r="30" fill="#66BB6A" style="animation-delay: 0.2s" />
+                            <text x="600" y="155" text-anchor="middle" fill="white" class="text-lg">70</text>
+                            
+                            <!-- Level 3 nodes -->
+                            <circle class="tree-node animated-node" cx="100" cy="250" r="30" fill="#81C784" style="animation-delay: 0.4s" />
+                            <text x="100" y="255" text-anchor="middle" fill="white" class="text-lg">20</text>
+                            
+                            <circle class="tree-node animated-node" cx="300" cy="250" r="30" fill="#81C784" style="animation-delay: 0.4s" />
+                            <text x="300" y="255" text-anchor="middle" fill="white" class="text-lg">40</text>
+                            
+                            <circle class="tree-node animated-node" cx="500" cy="250" r="30" fill="#81C784" style="animation-delay: 0.4s" />
+                            <text x="500" y="255" text-anchor="middle" fill="white" class="text-lg">60</text>
+                            
+                            <circle class="tree-node animated-node" cx="700" cy="250" r="30" fill="#81C784" style="animation-delay: 0.4s" />
+                            <text x="700" y="255" text-anchor="middle" fill="white" class="text-lg">80</text>
+                        </g>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Mathematical Foundation -->
+            <section class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-3xl font-bold mb-6 text-green-600">Mathematical Beauty</h2>
+                <div class="formula-block">
+                    <p class="mb-4">The mathematical definition of a binary tree is elegantly simple:</p>
+                    $$T = (N, E)$$
+                    <p class="mt-4">Where:</p>
+                    <ul class="list-disc pl-8 mt-2">
+                        <li>$$N$$ represents the set of all nodes</li>
+                        <li>$$E$$ represents the set of edges connecting nodes</li>
+                        <li>Each node has at most two children</li>
+                    </ul>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                    <div class="formula-block">
+                        <h3 class="text-xl font-bold mb-4">Tree Height</h3>
+                        $$h = \max(\text{leftHeight}, \text{rightHeight}) + 1$$
+                    </div>
+                    <div class="formula-block">
+                        <h3 class="text-xl font-bold mb-4">Maximum Nodes at Level i</h3>
+                        $$2^i$$
+                    </div>
+                </div>
+            </section>
+
+            <!-- Code Examples -->
+            <section class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold mb-6 text-green-600">Implementation Magic</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="code-block">
+                        <h3 class="text-xl font-bold mb-4 text-green-400">Inorder Traversal</h3>
+                        <pre>
+void inorderTraversal(Node* root) {
+    if (root != NULL) {
+        inorderTraversal(root->left);
+        visit(root);
+        inorderTraversal(root->right);
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <h3 class="text-xl font-bold mb-4 text-green-400">Preorder Traversal</h3>
+                        <pre>
+void preorderTraversal(Node* root) {
+    if (root != NULL) {
+        visit(root);
+        preorderTraversal(root->left);
+        preorderTraversal(root->right);
+    }
+}</pre>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MathJax Configuration -->
+    <script>
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                displayMath: [['$$','$$'], ['\\[','\\]']],
+                processEscapes: true
+            }
+        });
+    </script>
+
+    <!-- Tree Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nodes = document.querySelectorAll('.tree-node');
+            
+            nodes.forEach(node => {
+                node.addEventListener('mouseover', () => {
+                    node.style.filter = 'brightness(1.2)';
+                });
+                
+                node.addEventListener('mouseout', () => {
+                    node.style.filter = 'brightness(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
